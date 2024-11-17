@@ -1,4 +1,4 @@
-# Angular-POS-2024
+# POS-Angular-2024
 For Learning Angular
 
 # App
