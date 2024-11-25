@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import config from '../../config';
+import { MyModalComponent } from "../my-modal/my-modal.component";
 
 @Component({
   selector: 'app-food-type',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MyModalComponent],
   templateUrl: './food-type.component.html',
   styleUrl: './food-type.component.css'
 })
