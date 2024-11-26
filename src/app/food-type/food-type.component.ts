@@ -48,4 +48,29 @@ export class FoodTypeComponent {
       this.foodTypes = res.results;
     })
   }
+
+  async remove(item: any) {
+    try {
+      const button = await Swal.fire({
+        title: 'ลบรายการ',
+        text: 'คุณต้องการลบรายการใช้หรือไม่',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true
+      })
+
+      if(button.isConfirmed) {
+        this.http.delete(config.apiServer + '/api/foodType/remove/' + item.id)
+        .subscribe((res:any) => {
+          this.fetchData();
+        });
+      }
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      })
+    }
+  }
 }
