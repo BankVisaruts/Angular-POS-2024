@@ -16,20 +16,40 @@ export class FoodTypeComponent {
   name: string = '';
   remark: string = '';
   foodTypes: any = [];
+  id: number = 0;
 
   constructor(private http: HttpClient) {}
+
+  clearForm() {
+    this.name = '';
+    this.remark = '';
+    this.id = 0;
+  }
 
   save() {
     try {
       const payload = {
         name: this.name,
-        remark: this.remark
+        remark: this.remark,
+        id: 0,
       }
 
-      this.http.post(config.apiServer + '/api/foodType/create', payload)
-      .subscribe((res) => {
-        this.fetchData();
-      });
+      if (this.id > 0) {
+        payload.id = this.id;
+
+        this.http.put(config.apiServer + '/api/foodType/update', payload)
+        .subscribe((res: any) => {
+          this.fetchData();
+          this.id = 0;
+        });
+      } else {
+        this.http.post(config.apiServer + '/api/foodType/create', payload)
+        .subscribe((res) => {
+          this.fetchData();
+        });
+      }
+
+      document.getElementById('modalFoodType_btnClose')?.click();
     } catch (e: any) {
       Swal.fire({
         title: 'error',
@@ -72,5 +92,11 @@ export class FoodTypeComponent {
         icon: 'error'
       })
     }
+  }
+
+  edit(item: any) {
+    this.name = item.name;
+    this.remark = item.remark;
+    this.id = item.id;
   }
 }
