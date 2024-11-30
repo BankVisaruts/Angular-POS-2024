@@ -58,7 +58,7 @@ export class FoodSizeComponent {
       price: this.price,
       remark: this.remark,
       id: this.id,
-      foodTypeId: this.foodTypeId,
+      foodTypeId: parseInt(this.foodTypeId.toString()),
     }
 
     if (this.id > 0) {
@@ -100,6 +100,14 @@ export class FoodSizeComponent {
         icon: 'error'
       })
     }
+  }
+
+  edit(item: any) {
+    this.id = item.id;
+    this.name = item.name;
+    this.remark = item.remark;
+    this.foodTypeId = item.foodTypeId;
+    this.price = item.moneyAdded;
   }
 
 }
