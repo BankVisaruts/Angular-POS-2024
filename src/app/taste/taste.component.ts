@@ -44,7 +44,18 @@ export class TasteComponent {
   }
 
   fetchData() {
-
+    try {
+      this.http.get(config.apiServer + '/api/taste/list')
+      .subscribe((res: any) => {
+        this.tastes = res.results;
+      });
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      })
+    }
   }
 
   save() {
