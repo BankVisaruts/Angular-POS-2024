@@ -90,7 +90,43 @@ export class TasteComponent {
     }
   }
 
-  edit(item: any) {}
+  edit(item: any) {
+    try {
+      this.foodTypeId = item.foodTypeId;
+      this.name = item.name;
+      this.id = item.id;
+      this.remark = item.remark;
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.meesage,
+        icon: 'error'
+      })
+    }
+  }
 
-  remove(item: any) {}
+  async remove(item: any) {
+    try {
+      const button = await Swal.fire({
+        title: 'ลบข้อมูล',
+        text: 'คุณต้องการลบข้อมูลใช่หรือไม่',
+        icon: 'question',
+        showCancelButton: true,
+        showConfirmButton: true
+      })
+
+      if (button.isConfirmed) {
+        this.http.delete(config.apiServer + '/api/taste/remove/' + item.id)
+        .subscribe((res: any) => {
+          this.fetchData();
+        });
+      }
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.meesage,
+        icon: 'error'
+      })
+    }
+  }
 }
