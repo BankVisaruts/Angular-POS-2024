@@ -23,7 +23,7 @@
   </div>
   <div class="mt-3">
     <div>ชื่ออาหาร</div>
-    <input class="form-control" />
+    <input class="form-control" [(ngModel)]="name" />
   </div>
   <div class="mt-3">
     <div>File ภาพ</div>
@@ -31,19 +31,19 @@
   </div>
   <div class="mt-3">
     <div>ราคา</div>
-    <input class="form-control" type="number" />
+    <input class="form-control" type="number" [(ngModel)]="price" />
   </div>
   <div class="mt-3">
     <div>หมายเหตุ</div>
-    <input class="form-control" />
+    <input class="form-control" [(ngModel)]="remark" />
   </div>
   <div class="mt-3">
     <div>หมวด</div>
-    <input type="radio" name="foodType" value="food" /> อาหาร
-    <input type="radio" name="foodType" value="drink" /> เครื่องดื่ม
+    <input type="radio" name="foodType" value="food" [(ngModel)]="foodType" /> อาหาร
+    <input type="radio" name="foodType" value="drink" [(ngModel)]="foodType" /> เครื่องดื่ม
   </div>
 
-  <button class="mt-3 btn btn-primary">
+  <button class="mt-3 btn btn-primary" (click)="save()">
     <i class="fa fa-check me-2"></i>บันทึก
   </button>
 </app-my-modal>

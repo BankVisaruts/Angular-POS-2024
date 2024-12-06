@@ -53,4 +53,39 @@ export class FoodComponent {
   clearForm() {
 
   }
+
+  save() {
+    try {
+      const payload = {
+        foodTypeId: parseInt(this.foodTypeId.toString()),
+        name: this.name,
+        img: this.fileName,
+        price: this.price,
+        remark: this.remark,
+        foodType: this.foodType,
+        id: this.id
+      }
+
+      if (this.id > 0) {
+        this.http.put(config.apiServer + '/api/food/update', payload)
+        .subscribe((res: any) => {
+          this.fetchData();
+          this.id = 0;
+        })
+      } else {
+        this.http.post(config.apiServer + '/api/food/create', payload)
+        .subscribe((res: any) => {
+          this.fetchData();
+        })
+      }
+
+      document.getElementById('modalFood_btnClose')?.click();
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      })
+    }
+  }
 }
