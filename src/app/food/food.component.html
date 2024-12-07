@@ -7,6 +7,47 @@
     (click)="clearForm()">
       <i class="fa fa-plus me-2"></i>เพิ่มรายการ
     </button>
+
+    <table class="mt-3 table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th width="100px"></th>
+          <th>ประเภทอาหาร</th>
+          <th>หมวด</th>
+          <th>รายการ</th>
+          <th>หมายเหตุ</th>
+          <th class="text-end">ราคา</th>
+          <th width="110px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of foods; track $index) {
+          <tr>
+            @if (item.img != '')
+            {
+              <td><img src="{{ serverPath }}/uploads/{{item.img}}" width="100px" height="100px" /></td>
+            }
+            @else
+            {
+              <td>-</td>
+            }
+            <td>{{ item.FoodType.name }}</td>
+            <td>{{ item.foodType }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.remark }}</td>
+            <td class="text-end">{{ item.price }}</td>
+            <td class="text-center">
+              <button class="btn btn-primary me-2">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-danger" (click)="remove(item)">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -27,7 +68,7 @@
   </div>
   <div class="mt-3">
     <div>File ภาพ</div>
-    <input type="file" class="form-control" />
+    <input type="file" class="form-control" (change)="fileSeleted($event.target)" />
   </div>
   <div class="mt-3">
     <div>ราคา</div>
