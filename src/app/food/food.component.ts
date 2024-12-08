@@ -27,6 +27,7 @@ export class FoodComponent {
   foodTypeId: number = 0;
   file: File | undefined = undefined;
   serverPath: string = '';
+  img: string = '';
 
   ngOnInit() {
     this.fetchData();
@@ -73,6 +74,7 @@ export class FoodComponent {
     this.remark = '';
     this.foodType = 'food';
     this.id = 0;
+    this.img = '';
   }
 
   async save() {
@@ -165,6 +167,8 @@ export class FoodComponent {
     this.foodType = item.foodType;
     this.remark = item.remark;
     this.price = item.price;
+    this.img = item.img;
+    this.file = undefined;
   }
 
 }
