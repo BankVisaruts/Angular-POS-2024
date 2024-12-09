@@ -75,6 +75,9 @@ export class FoodComponent {
     this.foodType = 'food';
     this.id = 0;
     this.img = '';
+
+    const img = document.getElementById('img') as HTMLInputElement;
+    img.value = '';
   }
 
   async save() {
@@ -169,6 +172,33 @@ export class FoodComponent {
     this.price = item.price;
     this.img = item.img;
     this.file = undefined;
+
+    const img = document.getElementById('img') as HTMLInputElement;
+    img.value = '';
+  }
+
+  filterFood() {
+    this.filter('food');
+  }
+  filterDrink() {
+    this.filter('drink');
+  }
+  filterAll() {
+    this.fetchData();
+  }
+  filter(foodType: string) {
+    try {
+      this.http.get(config.apiServer + '/api/food/filter/' + foodType)
+      .subscribe((res: any) => {
+        this.foods = res.results;
+      });
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      });
+    }
   }
 
 }
