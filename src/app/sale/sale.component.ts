@@ -21,6 +21,21 @@ export class SaleComponent {
     this.apiPath = config.apiServer;
   }
 
+  filter(foodType: string) {
+    try {
+      this.http.get(config.apiServer + '/api/food/filter/' + foodType)
+      .subscribe((res: any) => {
+        this.foods = res.results;
+      });
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      })
+    }
+  }
+
   fetchData() {
     try {
       this.http.get(config.apiServer + '/api/food/list')
